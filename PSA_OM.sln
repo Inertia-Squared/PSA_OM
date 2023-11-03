@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSA_OM", "PSA_OM\PSA_OM.csproj", "{FCE38C98-5CD6-47EF-93A8-B853264CCCEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCE38C98-5CD6-47EF-93A8-B853264CCCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCE38C98-5CD6-47EF-93A8-B853264CCCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCE38C98-5CD6-47EF-93A8-B853264CCCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCE38C98-5CD6-47EF-93A8-B853264CCCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FE3C3A0-2DC3-40A5-A9CF-937C4C0098AF}
+	EndGlobalSection
+EndGlobal
