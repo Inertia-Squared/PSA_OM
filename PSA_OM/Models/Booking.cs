@@ -5,6 +5,7 @@ namespace PSA_OM.Models
     public class Booking
     {
         public int ID { get; set; }
+        [Display(Name = "Apartment ID")]
         public int ApartmentID { get; set; }
         public required string TravellerEmail { get; set; }
         [Display(Name = "Check-in Date")]

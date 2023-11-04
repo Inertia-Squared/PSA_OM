@@ -37,14 +37,29 @@ namespace PSA_OM.Pages.Apartments
         {
             if (!ModelState.IsValid) return Page();
 
+            var numberOfBedrooms = SearchModel.NumberOfBedrooms;
+            var checkInDate = SearchModel.CheckInDate;
+            var checkOutDate = SearchModel.CheckOutDate;
+
+            var sqlQuery = @"
+            SELECT a.*
+            FROM Apartments AS a
+            WHERE a.BedroomCount = {0}
+              AND NOT EXISTS (
+                SELECT 1
+                FROM Bookings AS b
+                WHERE b.TheRoomID = a.ID
+                  AND {1} < b.CheckOut
+                  AND b.CheckIn < {2}
+              )";
+
             AvailableApartments = await _context.Apartment
-            .Where(a => a.BedroomCount == SearchModel.NumberOfBedrooms && !_context.Booking
-                .Where(b => SearchModel.CheckInDate < b.CheckOut && b.CheckIn < SearchModel.CheckOutDate)
-                .Select(b => b.TheRoom.ID)
-                .Contains(a.ID))
-            .ToListAsync();
+                .FromSqlRaw(sqlQuery, numberOfBedrooms, checkInDate, checkOutDate)
+                .ToListAsync();
+
             return Page();
         }
+
     }
 
 }

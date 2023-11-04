@@ -33,35 +33,24 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/BookApartment">Book An Apartment</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Create">Book An Apartment</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/MyBookings">My Bookings</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Index">My Bookings</a>
                             </li>
                         }
                         @if (User.IsInRole("managers"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/ManageBookings">Manage Bookings</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Manage">Manage Bookings</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Statistics">Statistics</a>
                             </li>
                         }
                     </ul>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
-                            </li>
-                        </ul>
-                    }
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <partial name="_LoginPartial"/>
-                    }
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>

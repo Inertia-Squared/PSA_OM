@@ -108,7 +108,7 @@ namespace PSA_OM.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = "/Travellers/MyDetails")
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("/Travellers/MyDetails");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace PSA_OM.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return LocalRedirect("/Travellers/MyDetails");
                     }
                 }
                 foreach (var error in result.Errors)

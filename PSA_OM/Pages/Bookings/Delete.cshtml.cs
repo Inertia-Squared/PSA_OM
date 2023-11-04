@@ -20,7 +20,7 @@ namespace PSA_OM.Pages.Bookings
         }
 
         [BindProperty]
-      public Booking Booking { get; set; } = default!;
+        public Booking Booking { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +29,11 @@ namespace PSA_OM.Pages.Bookings
                 return NotFound();
             }
 
-            var booking = await _context.Booking.FirstOrDefaultAsync(m => m.ID == id);
+            var booking = await _context.Booking
+            .Include(b => b.TheRoom)
+            .Include(b => b.TheTraveller)
+            .FirstOrDefaultAsync(m => m.ID == id);
+
 
             if (booking == null)
             {
@@ -57,7 +61,7 @@ namespace PSA_OM.Pages.Bookings
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Manage");
         }
     }
 }
