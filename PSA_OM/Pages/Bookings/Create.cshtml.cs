@@ -54,7 +54,6 @@ namespace PSA_OM.Pages
                 return Page();
             }
 
-            // Check for availability
             var isAvailable = !_context.Booking.Any(b =>
                 b.ApartmentID == Booking.ApartmentID &&
                 ((Booking.CheckIn >= b.CheckIn && Booking.CheckIn < b.CheckOut) ||
@@ -64,7 +63,6 @@ namespace PSA_OM.Pages
 
             if (isAvailable)
             {
-                // Calculate the cost
                 var apartment = await _context.Apartment
                     .AsNoTracking()
                     .FirstOrDefaultAsync(a => a.ID == Booking.ApartmentID);

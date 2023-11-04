@@ -1,8 +1,10 @@
-﻿@page
+﻿@page "{sortOrder?}"
 @model PSA_OM.Pages.Bookings.IndexModel
 
 @{
     ViewData["Title"] = "My Bookings";
+    var checkInSortParam = Model.CurrentSort == "checkin_desc" ? "checkin" : "checkin_desc";
+    var costSortParam = Model.CurrentSort == "cost_desc" ? "cost" : "cost_desc";
 }
 
 <h1>My Bookings</h1>
@@ -11,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].CheckIn)
+                <a asp-page="./Index" asp-route-sortOrder="@checkInSortParam">Check-in Date</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Booking[0].CheckOut)
@@ -20,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Booking[0].ApartmentID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].Cost)
+                <a asp-page="./Index" asp-route-sortOrder="@costSortParam">Cost</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Booking[0].TheTraveller.GivenName)
@@ -28,6 +30,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Booking[0].TheTraveller.Surname)
             </th>
+            @if (User.IsInRole("manager"))
+            {
+                <th>Operations</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -52,7 +58,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TheTraveller.Surname)
                 </td>
-                @if (User.IsInRole("Admin"))
+                @if (User.IsInRole("manager"))
                 {
                     <td>
                         <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
