@@ -12,7 +12,7 @@ using PSA_OM.Models;
 
 namespace PSA_OM.Pages.Apartments
 {
-    [Authorize(Roles = "travellers, managers")]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

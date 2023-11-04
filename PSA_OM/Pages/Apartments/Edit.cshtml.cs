@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using PSA_OM.Models;
 
 namespace PSA_OM.Pages.Apartments
 {
+    [Authorize(Roles = "managers")]
     public class EditModel : PageModel
     {
         private readonly PSA_OM.Data.ApplicationDbContext _context;

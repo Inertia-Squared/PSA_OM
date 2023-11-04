@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using PSA_OM.Models;
 
 namespace PSA_OM.Pages
 {
+    [Authorize]
     public class BookModel : PageModel
     {
         private readonly ApplicationDbContext _context;

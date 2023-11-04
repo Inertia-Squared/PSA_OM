@@ -1,0 +1,112 @@
+﻿@page
+@model PSA_OM.Pages.Manager.StatisticsModel
+
+@{
+    ViewData["Title"] = "Statistics";
+    int minWidth = 1;
+    int maxWidth = 50;
+    int minTravellerValue = Model.TravellerCounts.Values.Any() ? Model.TravellerCounts.Values.Min() : 0;
+    int maxTravellerValue = Model.TravellerCounts.Values.Any() ? Model.TravellerCounts.Values.Max() : 0;
+    int minBookingValue = Model.BookingCounts.Values.Any() ? Model.BookingCounts.Values.Min() : 0;
+    int maxBookingValue = Model.BookingCounts.Values.Any() ? Model.BookingCounts.Values.Max() : 0;
+    int minBedValue = Model.BedroomBookingCounts.Values.Any() ? Model.BedroomBookingCounts.Values.Min() : 0;
+    int maxBedValue = Model.BedroomBookingCounts.Values.Any() ? Model.BedroomBookingCounts.Values.Max() : 0;
+}
+
+<h1>Statistics</h1>
+
+<h2>Traveller distribution with respect to postcodes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Postcode</th>
+            <th>Number of Travellers</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TravellerCounts)
+        {
+            int scaledValue;
+            if (maxTravellerValue == minTravellerValue)
+            {
+                scaledValue = maxWidth;
+            }
+            else
+            {
+                scaledValue = minWidth + (item.Value - minTravellerValue) * (maxWidth - minWidth) / (maxTravellerValue - minTravellerValue);
+            }
+            <tr>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+
+
+                <td>@string.Join("", Enumerable.Repeat("#", scaledValue))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Booking distribution with respect to apartments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Apartment ID</th>
+            <th>Number of Bookings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BookingCounts)
+        {
+            int scaledValue;
+            if (maxBookingValue == minBookingValue)
+            {
+                scaledValue = maxWidth;
+            }
+            else
+            {
+                scaledValue = minWidth + (item.Value - minBookingValue) * (maxWidth - minWidth) / (maxBookingValue - minBookingValue);
+            }
+            <tr>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+
+
+                <td>@string.Join("", Enumerable.Repeat("#", scaledValue))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Booking distribution with respect to bedroom counts</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Bedroom Count</th>
+            <th>Number of Bookings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BedroomBookingCounts.OrderBy(b => b.Key))
+        {
+            int scaledValue;
+            if (maxBedValue == minBedValue)
+            {
+                scaledValue = maxWidth;
+            }
+            else
+            {
+                scaledValue = minWidth + (item.Value - minBedValue) * (maxWidth - minWidth) / (maxBedValue - minBedValue);
+            }
+            <tr>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+
+
+                <td>@string.Join("", Enumerable.Repeat("#", scaledValue))</td>
+            </tr>
+        }
+    </tbody>
+</table>
