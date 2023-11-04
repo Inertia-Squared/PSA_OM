@@ -4,7 +4,35 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<head>
+    <script src="~/js/carousel.js"></script>
+</head>
+
+<div id="carousel" class="carousel-container">
+    <div class="carousel-arrow left-arrow" onclick="previousImage()">&#10094;</div>
+    <img id="carouselImage" src="images/abstract_apartment.png" alt="Abstract Apartment">
+    <div class="slide-text" id="caption">Abstract Apartment - $246.30/Night - 1 Bedroom</div>
+    <div class="carousel-arrow right-arrow" onclick="nextImage()">&#10095;</div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <h1>Welcome to Parra Serviced Apartments!</h1>
+            <p>Enjoy the highest quality and comfort with our selectiion of luxurious yet budget friendly catalogue of lodgings.</p>
+        </div>
+
+        <div class="col-sm-5">
+            <div style="margin-top: 5px"></div>
+            <h2>Tourist Attractions</h2>
+            <ul>
+                <li><a class="fancy-link" href="https://www.westernsydney.edu.au/future/our-campuses/parramatta-south-campus">The 8th Wonder of the World</a></li>
+                <li><a class="fancy-link" href="https://www.parrapark.com.au/">Parramatta Park</a></li>
+            </ul>
+            <h2>Amenities</h2>
+            <ul>
+                <li><a class="fancy-link" href="https://en.wikipedia.org/wiki/Parramatta_railway_station">Parramatta Station</a></li>
+            </ul>
+        </div>
+    </div>
 </div>

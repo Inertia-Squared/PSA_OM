@@ -1,0 +1,95 @@
+﻿@page
+@model PSA_OM.Pages.Apartments.IndexModel
+
+@{
+    ViewData["Title"] = "Search Apartments";
+}
+
+<h1>Search Apartments</h1>
+
+<form method="post" asp-action="Index">
+    <!-- Ensure this points to the correct action method for search -->
+    <div class="form-group">
+        <label asp-for="SearchModel.NumberOfBedrooms" class="control-label"></label>
+        <select asp-for="SearchModel.NumberOfBedrooms" class="form-control">
+            <option value="">-- Select --</option>
+            <option value="1">1 Bedroom</option>
+            <option value="2">2 Bedrooms</option>
+            <option value="3">3 Bedrooms</option>
+        </select>
+        <span asp-validation-for="SearchModel.NumberOfBedrooms" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SearchModel.CheckInDate" class="control-label"></label>
+        <input type="date" asp-for="SearchModel.CheckInDate" class="form-control" />
+        <span asp-validation-for="SearchModel.CheckInDate" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="SearchModel.CheckOutDate" class="control-label"></label>
+        <input type="date" asp-for="SearchModel.CheckOutDate" class="form-control" />
+        <span asp-validation-for="SearchModel.CheckOutDate" class="text-danger"></span>
+    </div>
+    <br/>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+<br/>
+<br/>
+@if (Model.AvailableApartments.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Level</th>
+                <th>Bedrooms</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apartment in Model.AvailableApartments)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="/Booking/Create"
+                           asp-route-apartmentId="@apartment.ID"
+                           asp-route-checkIn="@Model.SearchModel.CheckInDate.Date.ToString("yyyy-MM-dd")"
+                           asp-route-checkOut="@Model.SearchModel.CheckOutDate.Date.ToString("yyyy-MM-dd")">
+                            @apartment.ID
+                        </a>
+                    </td>
+                    <td>@apartment.Level</td>
+                    <td>@apartment.BedroomCount</td>
+                    <td>@apartment.Price.ToString("C")</td>
+                    
+                        <td>
+                        <a asp-page="./Details" asp-route-id="@apartment.ID">Details</a> @if (User.IsInRole("managers"))
+                        {
+                            <div>
+                                <a asp-page="./Edit" asp-route-id="@apartment.ID">Edit</a> |
+                                <a asp-page="./Delete" asp-route-id="@apartment.ID">Delete</a>
+                            </div>
+                        }
+                        </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.SearchModel != null)
+{
+    <p>No apartments match your search criteria.</p>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+            

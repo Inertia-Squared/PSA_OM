@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PSA_OM.Models;
 
 namespace PSA_OM.Data
 {
@@ -9,5 +10,9 @@ namespace PSA_OM.Data
             : base(options)
         {
         }
+
+        public DbSet<Apartment> Apartment { get; set; } = default!;
+        public DbSet<Booking> Booking { get; set; } = default!;
+        public DbSet<Traveller> Traveller { get; set; } = default!;
     }
 }

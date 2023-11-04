@@ -1,0 +1,41 @@
+﻿@page
+@model PSA_OM.Pages.Apartments.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Apartment</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apartment.Level)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apartment.Level)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apartment.BedroomCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apartment.BedroomCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apartment.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @($"{Model.Apartment.Price:C}")
+        </dd>
+    </dl>
+</div>
+<div>
+    @if(User.IsInRole("managers")){
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Apartment?.ID">Edit</a>
+    </div>
+    }
+    <a asp-page="./Index">Back to List</a>
+</div>

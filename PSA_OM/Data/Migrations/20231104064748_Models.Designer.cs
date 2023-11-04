@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSA_OM.Data;
 
@@ -10,9 +11,11 @@ using PSA_OM.Data;
 namespace PSA_OM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231104064748_Models")]
+    partial class Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -213,82 +216,6 @@ namespace PSA_OM.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PSA_OM.Models.Apartment", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BedroomCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Apartment");
-                });
-
-            modelBuilder.Entity("PSA_OM.Models.Booking", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ApartmentID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CheckIn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CheckOut")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TravellerEmail")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ApartmentID");
-
-                    b.HasIndex("TravellerEmail");
-
-                    b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("PSA_OM.Models.Traveller", b =>
-                {
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GivenName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Postcode")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Email");
-
-                    b.ToTable("Traveller");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -338,35 +265,6 @@ namespace PSA_OM.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PSA_OM.Models.Booking", b =>
-                {
-                    b.HasOne("PSA_OM.Models.Apartment", "TheRoom")
-                        .WithMany("TheBookings")
-                        .HasForeignKey("ApartmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PSA_OM.Models.Traveller", "TheTraveller")
-                        .WithMany("TheBookings")
-                        .HasForeignKey("TravellerEmail")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TheRoom");
-
-                    b.Navigation("TheTraveller");
-                });
-
-            modelBuilder.Entity("PSA_OM.Models.Apartment", b =>
-                {
-                    b.Navigation("TheBookings");
-                });
-
-            modelBuilder.Entity("PSA_OM.Models.Traveller", b =>
-                {
-                    b.Navigation("TheBookings");
                 });
 #pragma warning restore 612, 618
         }

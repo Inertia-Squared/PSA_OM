@@ -15,6 +15,6 @@ namespace PSA_OM.Models
         [Required, RegularExpression(@"[0-9]{4}")]
         public string Postcode { get; set; }
 
-        // public ICollection<Booking> TheBookings { get; set; }
+        public ICollection<Booking>? TheBookings { get; set; }
     }
 }
